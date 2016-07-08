@@ -1,5 +1,6 @@
 package entity;
 
+import data.ParserSchema;
 import entity.type.Diagnosis;
 import entity.type.History;
 import entity.type.Outcome;
@@ -25,4 +26,19 @@ public class Visit {
     private Diagnosis diagnosis;
     private Treatment treatment;
     private Outcome outcome;
+
+    /**
+     * Default constructor.
+     */
+    public Visit() {
+
+    }
+
+    /**
+     *
+     * @param schema
+     */
+    public Visit(ParserSchema schema) {
+
+    }
 }

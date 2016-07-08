@@ -1,7 +1,16 @@
 package graphics;
 
+import data.DataParser;
+import entity.Logbook;
+import entity.Student;
+
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ListIterator;
 
 /**
  * Created by mladen on 08/07/16.
@@ -13,6 +22,26 @@ public class View
     private ViewTable table;
     private JScrollPane scrollPane;
 
+
+    /**
+     * FileLoadAction
+     */
+    private class FileLoadAction extends AbstractAction {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            // Display the file dialog.
+            FileDialog fd = new FileDialog(View.this, "Choose a file", FileDialog.LOAD);
+            fd.setFile("*.csv");
+            fd.setVisible(true);
+
+            // Check if we have selected a file.
+            String filename = fd.getFile();
+            if (filename != null) {
+                // Pass on the full path.
+                openFile(fd.getDirectory() + filename);
+            }
+        }
+    }
 
     /**
      * Default constructor.
@@ -46,7 +75,7 @@ public class View
         JMenuItem menuItem = new JMenuItem("Load CSV");
         menuItem.setMnemonic(KeyEvent.VK_L);
         menuItem.setToolTipText("Select a file to load.");
-        //menuItem.addActionListener(new LoadAction());
+        menuItem.addActionListener(new FileLoadAction());
         menu.add(menuItem);
 
         menuItem = new JMenuItem("Exit");
@@ -65,5 +94,49 @@ public class View
      * Create the table view.
      */
     public void createTable() {
+        // Initialise the table.
+        table = new ViewTable();
+
+        // Add the table to a scrolling pane.
+        scrollPane = new JScrollPane(table);
+        add(scrollPane, BorderLayout.CENTER);
+    }
+
+    /**
+     * Clear the entries in the table.
+     */
+    public void clearTable() {
+        table.deleteRows();
+    }
+
+    /**
+     * Open a selected file.
+     *
+     * This method creates a <tt>DataParser</tt> instance
+     * and processes the file. Once processed, the returned
+     * league's teams are iterated and added to the table.
+     *
+     * @param file The file to open.
+     */
+    public void openFile(String file) {
+        DataParser parser = new DataParser();
+
+        // Clear the table.
+        clearTable();
+
+        try {
+            // Process the file.
+            Logbook book = parser.process(new File(file));
+
+            // Iterate over all students.
+            ListIterator<Student> students = book.getStudents().listIterator();
+            while (students.hasNext()) {
+                table.addRow(students.nextIndex() + 1, students.next());
+            }
+
+        } catch (FileNotFoundException e) {
+            // Display an error message.
+            JOptionPane.showMessageDialog(this, "Something went wrong with your file.");
+        }
     }
 }
