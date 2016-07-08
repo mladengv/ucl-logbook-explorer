@@ -1,9 +1,7 @@
-package entity;
+package entity.type;
 
 /**
  * Created by mladen on 08/07/16.
  */
-public class Logbook {
-
-
+public class Outcome {
 }
