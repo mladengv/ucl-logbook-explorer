@@ -19,10 +19,10 @@ public class DataParser {
     private Logbook book;
 
     // Map for the parser.
-    ParserMap map;
+    private ParserMap map;
 
     // Schema for the parser.
-    ParserSchema schema;
+    private ParserSchema schema;
 
     /**
      * Default constructor.
@@ -68,7 +68,7 @@ public class DataParser {
             // Fix trailing new lines.
             do {
                 line += scanner.nextLine();
-            } while(line.split(",").length < map.size());
+            } while(line.split(",(?=([^\"]*\"[^\"]*\")*[^\"]*$)").length < map.size());
 
             // Extract fields.
             String[] fields = line.split(",(?=([^\"]*\"[^\"]*\")*[^\"]*$)");
@@ -77,12 +77,6 @@ public class DataParser {
             for (int i = 0; i < fields.length; i++) {
                 fields[i] = fields[i].trim();
             }
-
-            /*
-            System.out.println(
-                    fields[map.get(ParserMap.Field.DATA_DIAGNOSIS)]
-            );
-            */
 
             /**
              * Add a record to the Logbook.
@@ -94,9 +88,10 @@ public class DataParser {
             );
         }
 
-        // Finish with scanner.
+        // Close scanner as no longer needed.
         scanner.close();
 
+        // Return the generated book.
         return book;
     }
 }

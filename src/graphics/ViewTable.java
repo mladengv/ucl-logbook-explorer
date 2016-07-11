@@ -1,12 +1,10 @@
 package graphics;
 
-import config.Config;
 import config.StatsConfig;
 import entity.Student;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import java.awt.*;
 
 /**
  * Created by mladen on 08/07/16.
@@ -32,10 +30,6 @@ public class ViewTable
      * Set default properties for the table.
      */
     public void initialise() {
-        setPreferredSize(new Dimension(
-                Config.WINDOW_WIDTH, Config.WINDOW_HEIGHT
-        ));
-
         // Disable column ordering.
         getTableHeader().setReorderingAllowed(false);
     }

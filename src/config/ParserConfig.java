@@ -18,7 +18,7 @@ public class ParserConfig {
         {
             put(ParserMap.Field.GENERAL_USERNAME, "Username");
             put(ParserMap.Field.GENERAL_NAME, "User");
-            put(ParserMap.Field.GENERAL_EMAIL, "\"Email address\"");
+            put(ParserMap.Field.GENERAL_EMAIL, "Email address");
 
             put(ParserMap.Field.PATIENT_IDENTIFIER, "General_PatientIdentifier");
             put(ParserMap.Field.PATIENT_BIRTHDAY, "Data_General_BirthDate");

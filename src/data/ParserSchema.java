@@ -7,6 +7,7 @@ import entity.type.Diagnosis;
 import entity.type.History;
 import entity.type.Outcome;
 import entity.type.Treatment;
+import helper.StringSanitizer;
 
 /**
  * Created by mladen on 08/07/16.
@@ -39,7 +40,7 @@ public class ParserSchema {
      * @return
      */
     public String obtain(ParserMap map, ParserMap.Field field, String[] fields) {
-        return fields[map.get(field)];
+        return StringSanitizer.deQuote(fields[map.get(field)]);
     }
 
     /**

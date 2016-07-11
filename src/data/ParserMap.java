@@ -1,6 +1,7 @@
 package data;
 
 import config.ParserConfig;
+import helper.StringSanitizer;
 
 import java.util.HashMap;
 
@@ -51,7 +52,7 @@ public class ParserMap  {
     public void populate(String[] map) {
         int count = 0;
         for (String entry : map) {
-            this.map.put(entry, count++);
+            this.map.put(StringSanitizer.deQuote(entry), count++);
         }
     }
 
