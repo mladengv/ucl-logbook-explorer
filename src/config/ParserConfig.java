@@ -9,6 +9,10 @@ import java.util.HashMap;
  */
 public class ParserConfig {
 
+    // Format for the dates.
+    public static String DATE_FORMAT = "E d MMMM yyyy";
+
+    // Map of fields to strings.
     public static HashMap<ParserMap.Field, String> fieldsMap
             = new HashMap<ParserMap.Field,String>() {
         {
