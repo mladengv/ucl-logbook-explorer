@@ -55,7 +55,7 @@ public class ParserMap  {
         }
     }
 
-    public Integer get(Field field) {
+    public int get(Field field) {
         return this.map.get(ParserConfig.fieldsMap.get(field));
     }
 

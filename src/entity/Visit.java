@@ -36,9 +36,76 @@ public class Visit {
 
     /**
      *
-     * @param schema
+     * @param diagnosis
      */
-    public Visit(ParserSchema schema) {
+    public Visit(History history, Diagnosis diagnosis, Treatment treatment, Outcome outcome) {
+        setDiagnosis(diagnosis);
+        setHistory(history);
+        setTreatment(treatment);
+        setOutcome(outcome);
+    }
 
+    /**
+     *
+     * @param history
+     */
+    public void setHistory(History history) {
+        this.history = history;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public History getHistory() {
+        return history;
+    }
+
+    /**
+     *
+     * @param diagnosis
+     */
+    public void setDiagnosis(Diagnosis diagnosis) {
+        this.diagnosis = diagnosis;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public Diagnosis getDiagnosis() {
+        return this.diagnosis;
+    }
+
+    /**
+     *
+     * @param treatment
+     */
+    public void setTreatment(Treatment treatment) {
+        this.treatment = treatment;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public Treatment getTreatment() {
+        return treatment;
+    }
+
+    /**
+     *
+     * @param outcome
+     */
+    public void setOutcome(Outcome outcome) {
+        this.outcome = outcome;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public Outcome getOutcome() {
+        return outcome;
     }
 }

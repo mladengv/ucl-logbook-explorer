@@ -133,7 +133,6 @@ public class View
             while (students.hasNext()) {
                 table.addRow(students.nextIndex() + 1, students.next());
             }
-
         } catch (FileNotFoundException e) {
             // Display an error message.
             JOptionPane.showMessageDialog(this, "Something went wrong with your file.");

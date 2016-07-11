@@ -1,6 +1,7 @@
 package graphics;
 
 import config.Config;
+import config.StatsConfig;
 import entity.Student;
 
 import javax.swing.*;
@@ -12,7 +13,6 @@ import java.awt.*;
  */
 public class ViewTable
         extends JTable {
-
 
     private DefaultTableModel model;
 
@@ -78,7 +78,7 @@ public class ViewTable
      * Add a row to the table.
      *
      * @param index The position of the row.
-     * @param student The team to add.
+     * @param student The student to add.
      */
     public void addRow(int index, Student student) {
 
@@ -87,8 +87,8 @@ public class ViewTable
                 index,
                 student.getName(),
                 student.getUsername(),
-                0,
-                0,
+                student.statistics.getDescriptive(StatsConfig.Student.NUM_PATIENTS),
+                student.statistics.getDescriptive(StatsConfig.Student.NUM_VISITS),
         });
     }
 

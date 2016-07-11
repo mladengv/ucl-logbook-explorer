@@ -4,6 +4,7 @@ import config.ParserConfig;
 import entity.Logbook;
 import entity.Student;
 import entity.Visit;
+import entity.type.Diagnosis;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -19,6 +20,7 @@ public class DataParser {
 
     // Map for the parser.
     ParserMap map;
+
     // Schema for the parser.
     ParserSchema schema;
 
@@ -30,6 +32,8 @@ public class DataParser {
         book = new Logbook();
         // Initialise the map.
         map = new ParserMap();
+        // Initialise the schema.
+        schema = new ParserSchema();
     }
 
     /**
@@ -54,6 +58,9 @@ public class DataParser {
             map.populate(fieldsMap);
         }
 
+        // Set the parser's map for the schema.
+        schema.setMap(map);
+
         // Read all the remaining lines.
         while (scanner.hasNextLine()) {
             String line = "";
@@ -71,11 +78,18 @@ public class DataParser {
                 fields[i] = fields[i].trim();
             }
 
-            book.addStudent(new Student(
-                    fields[map.get(ParserMap.Field.GENERAL_USERNAME)],
-                    fields[map.get(ParserMap.Field.GENERAL_NAME)],
-                    fields[map.get(ParserMap.Field.GENERAL_EMAIL)]
-                )
+            /*
+            System.out.println(
+                    fields[map.get(ParserMap.Field.DATA_DIAGNOSIS)]
+            );
+            */
+
+            /**
+             * Add a record to the Logbook.
+             */
+            book.addRecord(
+                    schema.createStudent(fields),
+                    schema.createVisit(fields)
             );
         }
 

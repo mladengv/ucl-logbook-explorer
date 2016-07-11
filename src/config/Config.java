@@ -8,7 +8,7 @@ package config;
 public class Config {
 
     // Common strings.
-    public static String TITLE = "Logbook Processor";
+    public static String TITLE = "Logbook Explorer";
 
     // Window dimensions.
     public static int WINDOW_WIDTH = 800;

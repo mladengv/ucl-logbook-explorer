@@ -1,5 +1,10 @@
 package entity;
 
+import helper.Statistics;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+
 /**
  * Created by mladen on 08/07/16.
  */
@@ -13,11 +18,14 @@ public class Student
     // Their email.
     private String email;
 
+    // Local statistics.
+    public Statistics statistics;
+
     /**
      * Default constructor.
      */
     public Student() {
-
+        statistics = new Statistics();
     }
 
     /**
@@ -27,6 +35,8 @@ public class Student
      * @param email
      */
     public Student(String username, String name, String email) {
+        this();
+
         setUsername(username);
         setName(name);
         setEmail(email);
@@ -79,8 +89,6 @@ public class Student
     public String getEmail() {
         return email;
     }
-
-
 
     /**
      * Comparison for students.
