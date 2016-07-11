@@ -3,6 +3,7 @@ package entity;
 import config.StatsConfig;
 
 import java.lang.reflect.Array;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -39,13 +40,13 @@ public class Logbook {
      */
     public Logbook() {
         // Initialise local objects.
-
         students = new ArrayList<>();
         patients = new ArrayList<>();
         visits = new ArrayList<>();
 
         // Initialise the relationship maps.
         mapStudentToVisit = new HashMap<>();
+        mapStudentToPatient = new HashMap<>();
     }
 
     /**
@@ -58,11 +59,14 @@ public class Logbook {
      * @return
      */
     public Boolean addStudent(Student student) {
+        // Check if the student is already registered.
         if (!students.contains(student)) {
             // Add the student to the list.
             students.add(student);
-            // Initialise the student's maps.
+
+            // Initialise the maps for the given student.
             initialiseStudentToVisit(student);
+            initialiseStudentToPatient(student);
 
             return true;
         }
@@ -102,6 +106,33 @@ public class Logbook {
         return null;
     }
 
+
+    /**
+     *
+     * @param patient
+     * @return
+     */
+    protected Boolean addPatient(Patient patient) {
+        // Check if the patient is already registered.
+        if (!patients.contains(patient)) {
+            // Add the patient to the list.
+            patients.add(patient);
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     *
+     * @param patient
+     * @param student
+     */
+    protected void addPatient(Patient patient, Student student) {
+        if (addPatient(patient)) {
+            addStudentToPatient(student, patient);
+        }
+    }
+
     /**
      * Visits
      */
@@ -115,6 +146,16 @@ public class Logbook {
     }
 
     /**
+     *
+     * @param visit
+     * @param student
+     */
+    protected void addVisit(Visit visit, Student student) {
+        addVisit(visit);
+        addStudentToVisit(student, visit);
+    }
+
+    /**
      * Records
      */
 
@@ -123,17 +164,13 @@ public class Logbook {
      * @param student
      * @param visit
      */
-    public void addRecord(Student student, Visit visit) {
+    public void addRecord(Student student, Patient patient, Visit visit) {
         addStudent(student);
-        addVisit(visit);
 
         Student localStudent = findStudentByUsername(student.getUsername());
 
-        // Create relationships
-        addStudentToVisit(localStudent, visit);
-
-        // Update local statistics
-        localStudent.statistics.increaseDescriptive(StatsConfig.Student.NUM_VISITS);
+        addPatient(patient, localStudent);
+        addVisit(visit, localStudent);
     }
 
     /**
@@ -144,8 +181,16 @@ public class Logbook {
      *
      * @param student
      */
-    protected void initialiseStudentToVisit(Student student) {
+    private void initialiseStudentToVisit(Student student) {
         mapStudentToVisit.put(student, new ArrayList<Visit>());
+    }
+
+    /**
+     *
+     * @param student
+     */
+    private void initialiseStudentToPatient(Student student) {
+        mapStudentToPatient.put(student, new ArrayList<Patient>());
     }
 
     /**
@@ -159,5 +204,22 @@ public class Logbook {
 
         mapStudentToVisit.put(student, visits);
 
+        // Update local statistics
+        student.statistics.increaseDescriptive(StatsConfig.Student.NUM_VISITS);
+    }
+
+    /**
+     *
+     * @param student
+     * @param patient
+     */
+    protected void addStudentToPatient(Student student, Patient patient) {
+        ArrayList<Patient> patients = mapStudentToPatient.get(student);
+        patients.add(patient);
+
+        mapStudentToPatient.put(student, patients);
+
+        // Update local count of patients for Student.
+        student.statistics.increaseDescriptive(StatsConfig.Student.NUM_PATIENTS);
     }
 }

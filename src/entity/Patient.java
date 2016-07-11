@@ -11,12 +11,16 @@ import java.util.Locale;
 /**
  * Created by mladen on 08/07/16.
  */
-public class Patient {
+public class Patient
+        implements Comparable<Patient> {
 
+    // Unique identifier of the patient.
     private String identifier;
 
+    // Date of birth (currently just year).
     private Date dateOfBirth;
 
+    // Gender of the patient.
     private String gender;
 
     /**
@@ -107,5 +111,25 @@ public class Patient {
      */
     public String getGender() {
         return gender;
+    }
+
+    /**
+     * Comparison for patients.
+     *
+     * @param object
+     * @return <tt>True</tt>, if the patients have the same identifier.
+     *         <tt>False</tt> otherwise.
+     */
+    @Override
+    public boolean equals(Object object) {
+        // Check if we are able to compare.
+        if (object != null && object instanceof Patient) {
+            return identifier.equals(((Patient)object).getIdentifier());
+        }
+        return false;
+    }
+
+    public int compareTo(Patient patient) {
+        return 0;
     }
 }

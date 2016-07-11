@@ -1,5 +1,6 @@
 package data;
 
+import entity.Patient;
 import entity.Student;
 import entity.Visit;
 import entity.type.Diagnosis;
@@ -61,6 +62,19 @@ public class ParserSchema {
                 obtain(map, ParserMap.Field.GENERAL_USERNAME, fields),
                 obtain(map, ParserMap.Field.GENERAL_NAME, fields),
                 obtain(map, ParserMap.Field.GENERAL_EMAIL, fields)
+        );
+    }
+
+    /**
+     *
+     * @param fields
+     * @return
+     */
+    public Patient createPatient(String[] fields) {
+        return new Patient(
+                obtain(map, ParserMap.Field.PATIENT_IDENTIFIER, fields),
+                obtain(map, ParserMap.Field.PATIENT_BIRTHDAY, fields),
+                obtain(map, ParserMap.Field.PATIENT_GENDER, fields)
         );
     }
 

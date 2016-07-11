@@ -89,6 +89,7 @@ public class DataParser {
              */
             book.addRecord(
                     schema.createStudent(fields),
+                    schema.createPatient(fields),
                     schema.createVisit(fields)
             );
         }
