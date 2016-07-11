@@ -36,4 +36,12 @@ public class Treatment {
     public void addTreatment(String treatment) {
         treatments.add(treatment);
     }
+
+    /**
+     *
+     * @return
+     */
+    public ArrayList<String> getTreatments() {
+        return treatments;
+    }
 }

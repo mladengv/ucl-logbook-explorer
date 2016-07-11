@@ -36,4 +36,12 @@ public class Outcome {
     public void addOutcome(String outcome) {
         outcomes.add(outcome);
     }
+
+    /**
+     *
+     * @return
+     */
+    public ArrayList<String> getOUtcomes() {
+        return outcomes;
+    }
 }

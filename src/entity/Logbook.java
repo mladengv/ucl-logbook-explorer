@@ -129,6 +129,7 @@ public class Logbook {
      */
     protected void addPatient(Patient patient, Student student) {
         if (addPatient(patient)) {
+            student.addPatient(patient);
             addStudentToPatient(student, patient);
         }
     }
@@ -153,6 +154,8 @@ public class Logbook {
     protected void addVisit(Visit visit, Student student) {
         addVisit(visit);
         addStudentToVisit(student, visit);
+
+        student.addVisit(visit);
     }
 
     /**

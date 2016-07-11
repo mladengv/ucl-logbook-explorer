@@ -3,7 +3,6 @@ package entity;
 import helper.Statistics;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
  * Created by mladen on 08/07/16.
@@ -18,6 +17,10 @@ public class Student
     // Their email.
     private String email;
 
+    // Local list of patients.
+    private ArrayList<Patient> patients;
+    // Local list of visits.
+    private ArrayList<Visit> visits;
     // Local statistics.
     public Statistics statistics;
 
@@ -25,6 +28,10 @@ public class Student
      * Default constructor.
      */
     public Student() {
+
+        patients = new ArrayList<>();
+        visits = new ArrayList<>();
+
         statistics = new Statistics();
     }
 
@@ -88,6 +95,41 @@ public class Student
      */
     public String getEmail() {
         return email;
+    }
+
+    /**
+     *
+     * @param patient
+     */
+    public void addPatient(Patient patient) {
+        patients.add(patient);
+    }
+
+    /**
+     *
+     * @return
+     */
+    public ArrayList<Patient> getPatients() {
+        return patients;
+    }
+
+    /**
+     ** Visits
+     */
+    /**
+     *
+     * @param visit
+     */
+    public void addVisit(Visit visit) {
+        visits.add(visit);
+    }
+
+    /**
+     *
+     * @return
+     */
+    public ArrayList<Visit> getVisits() {
+        return visits;
     }
 
     /**

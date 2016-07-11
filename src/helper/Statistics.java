@@ -5,15 +5,19 @@ import java.util.HashMap;
 /**
  * Created by mladen on 10/07/16.
  */
-public class Statistics<Type> {
+public class Statistics {
 
-    private HashMap<Type, Integer> descriptive;
+    private HashMap<String, Integer> listDescriptive;
 
     /**
-     *
+     * Default constructor.
      */
     public Statistics() {
-        descriptive = new HashMap<>();
+        listDescriptive = new HashMap<>();
+    }
+
+    public HashMap<String, Integer> getListDescriptive() {
+        return listDescriptive;
     }
 
     /**
@@ -21,8 +25,8 @@ public class Statistics<Type> {
      * @param name
      * @param value
      */
-    public void addDescriptive(Type name, Integer value) {
-        descriptive.put(name, value);
+    public void addDescriptive(String name, Integer value) {
+        listDescriptive.put(name, value);
     }
 
     /**
@@ -30,8 +34,8 @@ public class Statistics<Type> {
      * @param name
      * @return
      */
-    public Integer getDescriptive(Type name) {
-        return descriptive.get(name);
+    public Integer getDescriptive(String name) {
+        return listDescriptive.get(name);
     }
 
     /**
@@ -39,18 +43,18 @@ public class Statistics<Type> {
      * @param name
      * @param value
      */
-    public void updateDescriptive(Type name, Integer value) {
-        if (!descriptive.containsKey(name)) {
+    public void updateDescriptive(String name, Integer value) {
+        if (!listDescriptive.containsKey(name)) {
             addDescriptive(name, 0);
         }
-        descriptive.put(name, descriptive.get(name) + value);
+        listDescriptive.put(name, listDescriptive.get(name) + value);
     }
 
     /**
      *
      * @param name
      */
-    public void increaseDescriptive(Type name) {
+    public void increaseDescriptive(String name) {
         updateDescriptive(name, 1);
     }
 }

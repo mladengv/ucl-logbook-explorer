@@ -44,7 +44,7 @@ public class Diagnosis {
      *
      * @return
      */
-    public String[] getDiagnoses() {
-        return (String[]) this.diagnoses.toArray();
+    public ArrayList<String> getDiagnoses() {
+        return diagnoses;
     }
 }

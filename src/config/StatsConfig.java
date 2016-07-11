@@ -8,9 +8,9 @@ public class StatsConfig {
     /**
      * Student
      */
-    public enum Student {
-        NUM_PATIENTS,
-        NUM_VISITS
+    public static class Student {
+        public static final String NUM_PATIENTS = "num_patients";
+        public static final String NUM_VISITS = "num_visits";
     };
 
     /**

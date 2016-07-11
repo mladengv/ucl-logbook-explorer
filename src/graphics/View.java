@@ -1,6 +1,7 @@
 package graphics;
 
 import data.DataParser;
+import data.export.DataExportJSON;
 import entity.Logbook;
 import entity.Student;
 
@@ -17,6 +18,9 @@ import java.util.ListIterator;
  */
 public class View
         extends JFrame {
+
+    // Local copy of Logbook.
+    Logbook book;
 
     // The table and scroll pane of the view.
     private ViewTable table;
@@ -40,6 +44,19 @@ public class View
                 // Pass on the full path.
                 openFile(fd.getDirectory() + filename);
             }
+        }
+    }
+
+    private class GenerateAction extends AbstractAction {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            DataExportJSON jsonExporter = new DataExportJSON();
+
+            jsonExporter.convertStudent(
+                book.getStudent(
+                        table.getSelectedRow()
+                )
+            );
         }
     }
 
@@ -87,6 +104,19 @@ public class View
         // Add the menu to the frame.
         menuBar.add(menu);
 
+        // Generate.
+        menu = new JMenu("Generate");
+        menu.setMnemonic(KeyEvent.VK_G);
+
+        // Student JSON file.
+        menuItem = new JMenuItem("Student JSON file");
+        menuItem.setMnemonic(KeyEvent.VK_J);
+        menuItem.setToolTipText("Generate an output file for the selected student.");
+        menuItem.addActionListener(new GenerateAction());
+        menu.add(menuItem);
+
+        menuBar.add(menu);
+
         setJMenuBar(menuBar);
     }
 
@@ -126,7 +156,7 @@ public class View
 
         try {
             // Process the file.
-            Logbook book = parser.process(new File(file));
+            book = parser.process(new File(file));
 
             // Iterate over all students.
             ListIterator<Student> students = book.getStudents().listIterator();

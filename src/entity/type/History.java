@@ -67,7 +67,7 @@ public class History {
      *
      * @return
      */
-    public String[] getConditions() {
-        return (String[]) conditions.toArray();
+    public ArrayList<String> getConditions() {
+        return conditions;
     }
 }
