@@ -2,6 +2,8 @@ package graphics;
 
 import data.export.DataExportJSON;
 import entity.Logbook;
+import graphics.actions.ExitAction;
+import graphics.actions.ExportAction;
 import graphics.actions.FileLoadAction;
 import graphics.panels.IntroPanel;
 import graphics.panels.ProgressPanel;
@@ -9,7 +11,6 @@ import graphics.panels.TablePanel;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 
 /**
@@ -27,20 +28,6 @@ public class View
     private IntroPanel introPanel;
     private ProgressPanel progressPanel;
     private TablePanel tablePanel;
-
-
-    private class GenerateAction extends AbstractAction {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            DataExportJSON jsonExporter = new DataExportJSON();
-
-            jsonExporter.convertStudent(
-                book.getStudent(
-                        tablePanel.getTable().getSelectedRow()
-                )
-            );
-        }
-    }
 
     /**
      * Default constructor.
@@ -80,8 +67,8 @@ public class View
 
         menuItem = new JMenuItem("Exit");
         menuItem.setMnemonic(KeyEvent.VK_E);
-        menuItem.setToolTipText("Exit the program.");
-        //menuItem.addActionListener(new ExitAction());
+        menuItem.setToolTipText("Exit the program");
+        menuItem.addActionListener(new ExitAction());
         menu.add(menuItem);
 
         // Add the menu to the frame.
@@ -95,7 +82,7 @@ public class View
         menuItem = new JMenuItem("Student JSON file");
         menuItem.setMnemonic(KeyEvent.VK_J);
         menuItem.setToolTipText("Generate an output file for the selected student.");
-        menuItem.addActionListener(new GenerateAction());
+        menuItem.addActionListener(new ExportAction(this));
         menu.add(menuItem);
 
         menuBar.add(menu);

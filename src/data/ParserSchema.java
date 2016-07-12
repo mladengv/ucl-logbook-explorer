@@ -9,6 +9,8 @@ import entity.type.Outcome;
 import entity.type.Treatment;
 import helper.StringSanitizer;
 
+import java.io.IOException;
+
 /**
  * Created by mladen on 08/07/16.
  */
@@ -32,6 +34,15 @@ public class ParserSchema {
         this.map = map;
     }
 
+    public String obtainPlain(ParserMap map, ParserMap.Field field, String[] fields) {
+        try {
+            return fields[map.get(field)];
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     /**
      *
      * @param map
@@ -40,8 +51,10 @@ public class ParserSchema {
      * @return
      */
     public String obtain(ParserMap map, ParserMap.Field field, String[] fields) {
-        return StringSanitizer.deQuote(fields[map.get(field)]);
+        return StringSanitizer.deQuote(obtainPlain(map, field, fields));
     }
+
+
 
     /**
      *
@@ -98,7 +111,9 @@ public class ParserSchema {
     public History createHistory(String[] fields) {
         return new History(
                 obtain(map, ParserMap.Field.DATA_MEDICAL_HISTORY, fields),
-                obtainArray(map, ParserMap.Field.DATA_MEDICAL_HISTORY_CONDITIONS, fields)
+                obtainArray(map, ParserMap.Field.DATA_MEDICAL_HISTORY_CONDITIONS, fields),
+                obtainArray(map, ParserMap.Field.DATA_BEHAVIOUR_MANAGEMENT, fields),
+                obtainPlain(map, ParserMap.Field.NOTES_MEDICAL_HISTORY, fields)
         );
     }
 
@@ -131,6 +146,8 @@ public class ParserSchema {
      */
     public Visit createVisit(String[] fields) {
         return new Visit(
+                obtain(map, ParserMap.Field.APPOINTMENT_TYPE, fields),
+                obtain(map, ParserMap.Field.APPOINTMENT_DATE, fields),
                 createHistory(fields),
                 createDiagnosis(fields),
                 createTreatment(fields),

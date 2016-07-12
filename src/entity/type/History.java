@@ -1,5 +1,6 @@
 package entity.type;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -14,13 +15,17 @@ public class History {
     private ArrayList<String> conditions;
 
     // List of behaviour management.
-    private ArrayList<String> behaviourManagement;
+    private ArrayList<String> behaviour;
+
+    // Notes
+    private String notes;
 
     /**
      *
      */
     public History() {
         conditions = new ArrayList<>();
+        behaviour = new ArrayList<>();
     }
 
     public History(String availability) {
@@ -37,6 +42,20 @@ public class History {
         for (String condition : conditions) {
             addCondition(condition);
         }
+    }
+
+    /**
+     *
+     * @param availability
+     * @param conditions
+     * @param behaviourManagement
+     */
+    public History(String availability, String[] conditions, String[] behaviourManagement, String notes) {
+        this(availability, conditions);
+        for (String behaviour : behaviourManagement) {
+            addBehaviour(behaviour);
+        }
+        setNotes(notes);
     }
 
     /**
@@ -69,5 +88,30 @@ public class History {
      */
     public ArrayList<String> getConditions() {
         return conditions;
+    }
+
+    /**
+     *
+     * @param behaviour
+     */
+    public void addBehaviour(String behaviour) {
+        this.behaviour.add(behaviour);
+    }
+
+    /**
+     *
+     * @return
+     */
+    public ArrayList<String> getBehaviour() {
+        return behaviour;
+    }
+
+
+    public void setNotes(String notes) {
+        this.notes = notes;
+    }
+
+    public String getNotes() {
+        return notes;
     }
 }

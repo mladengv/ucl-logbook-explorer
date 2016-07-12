@@ -3,6 +3,7 @@ package data;
 import config.ParserConfig;
 import helper.StringSanitizer;
 
+import java.io.IOException;
 import java.util.HashMap;
 
 /**
@@ -10,6 +11,7 @@ import java.util.HashMap;
  */
 public class ParserMap  {
 
+    // The internal map of fields.
     public enum Field {
         GENERAL_USERNAME,
         GENERAL_NAME,
@@ -43,12 +45,20 @@ public class ParserMap  {
         NOTES_TRAUMA,
     }
 
+    //
     private HashMap<String, Integer> map;
 
+    /**
+     *
+     */
     public ParserMap() {
         map = new HashMap<>();
     }
 
+    /**
+     *
+     * @param map
+     */
     public void populate(String[] map) {
         int count = 0;
         for (String entry : map) {
@@ -56,10 +66,24 @@ public class ParserMap  {
         }
     }
 
-    public int get(Field field) {
-        return this.map.get(ParserConfig.fieldsMap.get(field));
+    /**
+     *
+     * @param field
+     * @return
+     * @throws IOException
+     */
+    public int get(Field field) throws IOException {
+        if (map.containsKey(ParserConfig.fieldsMap.get(field))) {
+            return this.map.get(ParserConfig.fieldsMap.get(field));
+        } else {
+            throw new IOException("Not found");
+        }
     }
 
+    /**
+     *
+     * @return
+     */
     public int size() {
         return map.size();
     }

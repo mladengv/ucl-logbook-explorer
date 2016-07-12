@@ -1,5 +1,6 @@
 package helper;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -56,5 +57,16 @@ public class Statistics {
      */
     public void increaseDescriptive(String name) {
         updateDescriptive(name, 1);
+    }
+
+
+    public void increaseCount(String name) {
+        increaseDescriptive(name);
+    }
+
+    public void increaseCount(ArrayList<String> names) {
+        for (String name : names) {
+            increaseDescriptive(name);
+        }
     }
 }

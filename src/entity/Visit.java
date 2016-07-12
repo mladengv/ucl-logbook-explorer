@@ -14,13 +14,13 @@ import java.util.Date;
 public class Visit {
 
     // Time of appointment.
-    private Date appointmentDate;
+    private String appointmentDate;
 
     // Type of appointment.
     private String appointmentType;
 
     /**
-     * Contents of the Visit.
+     * Contents of the Count.
      */
     private History history;
     private Diagnosis diagnosis;
@@ -30,19 +30,36 @@ public class Visit {
     /**
      * Default constructor.
      */
-    public Visit() {
-
+    public Visit(String type, String date) {
+        setAppointmentType(type);
+        setAppointmentDate(date);
     }
 
     /**
      *
      * @param diagnosis
      */
-    public Visit(History history, Diagnosis diagnosis, Treatment treatment, Outcome outcome) {
+    public Visit(String type, String date, History history, Diagnosis diagnosis, Treatment treatment, Outcome outcome) {
+        this(type, date);
+
         setDiagnosis(diagnosis);
         setHistory(history);
         setTreatment(treatment);
         setOutcome(outcome);
+    }
+
+    public void setAppointmentDate(String date) {
+        this.appointmentDate = date;
+    }
+    public String getAppointmentDate() {
+        return appointmentDate;
+    }
+
+    public void setAppointmentType(String type) {
+        this.appointmentType = type;
+    }
+    public String getAppointmentType() {
+        return appointmentType;
     }
 
     /**

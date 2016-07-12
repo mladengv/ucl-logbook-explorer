@@ -1,8 +1,10 @@
 package entity;
 
+import config.StatsConfig;
 import helper.Statistics;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by mladen on 08/07/16.
@@ -24,6 +26,9 @@ public class Student
     // Local statistics.
     public Statistics statistics;
 
+
+    public HashMap<String, Statistics> occurrenceStats;
+
     /**
      * Default constructor.
      */
@@ -33,6 +38,8 @@ public class Student
         visits = new ArrayList<>();
 
         statistics = new Statistics();
+
+        initialise();
     }
 
     /**
@@ -47,6 +54,16 @@ public class Student
         setUsername(username);
         setName(name);
         setEmail(email);
+    }
+
+    public void initialise() {
+        occurrenceStats = new HashMap<>();
+        occurrenceStats.put(StatsConfig.Count.COUNT_GENDER, new Statistics());
+        occurrenceStats.put(StatsConfig.Count.COUNT_HISTORY_CONDITIONS, new Statistics());
+        occurrenceStats.put(StatsConfig.Count.COUNT_BEHAVIOUR_MANAGEMENT, new Statistics());
+        occurrenceStats.put(StatsConfig.Count.COUNT_DIAGNOSES, new Statistics());
+        occurrenceStats.put(StatsConfig.Count.COUNT_TREATMENTS, new Statistics());
+        occurrenceStats.put(StatsConfig.Count.COUNT_OUTCOMES, new Statistics());
     }
 
     /**
@@ -103,6 +120,9 @@ public class Student
      */
     public void addPatient(Patient patient) {
         patients.add(patient);
+
+        // Update statistics.
+        updateStats(patient);
     }
 
     /**
@@ -121,7 +141,10 @@ public class Student
      * @param visit
      */
     public void addVisit(Visit visit) {
+        // Add the visit to the list.
         visits.add(visit);
+        // Update statistics.
+        updateStats(visit);
     }
 
     /**
@@ -130,6 +153,31 @@ public class Student
      */
     public ArrayList<Visit> getVisits() {
         return visits;
+    }
+
+
+    private void updateStats(Visit visit) {
+        occurrenceStats.get(
+                StatsConfig.Count.COUNT_HISTORY_CONDITIONS
+        ).increaseCount(visit.getHistory().getConditions());
+        occurrenceStats.get(
+                StatsConfig.Count.COUNT_BEHAVIOUR_MANAGEMENT
+        ).increaseCount(visit.getHistory().getBehaviour());
+        occurrenceStats.get(
+                StatsConfig.Count.COUNT_DIAGNOSES
+        ).increaseCount(visit.getDiagnosis().getDiagnoses());
+        occurrenceStats.get(
+                StatsConfig.Count.COUNT_TREATMENTS
+        ).increaseCount(visit.getTreatment().getTreatments());
+        occurrenceStats.get(
+                StatsConfig.Count.COUNT_OUTCOMES
+        ).increaseCount(visit.getOutcome().getOUtcomes());
+    }
+
+    private void updateStats(Patient patient) {
+        occurrenceStats.get(
+                StatsConfig.Count.COUNT_GENDER
+        ).increaseCount(patient.getGender());
     }
 
     /**

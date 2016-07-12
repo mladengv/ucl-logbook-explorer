@@ -50,21 +50,15 @@ public class FileLoadAction
      * @param file The file to open.
      */
     public void openFile(String file) {
-
-
         // Hide introduction panel.
         context.showViewer();
 
         // Clear the table.
         context.getTablePanel().clearTable();
 
-
         task = new Task(file);
         //task.addPropertyChangeListener(this);
         task.execute();
-
-
-
     }
 
     class Task extends SwingWorker<Void, Void> {
@@ -87,6 +81,8 @@ public class FileLoadAction
                 while (students.hasNext()) {
                     context.getTablePanel().getTable().addRow(students.nextIndex() + 1, students.next());
                 }
+
+                context.removeProgress();
 
             } catch (FileNotFoundException e) {
                 // Display an error message.

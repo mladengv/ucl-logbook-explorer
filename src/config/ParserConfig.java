@@ -42,7 +42,7 @@ public class ParserConfig {
             put(ParserMap.Field.DATA_CUSTOM_2, "Data_Custom_2");
             put(ParserMap.Field.DATA_CUSTOM_3, "Data_Custom_3");
 
-            put(ParserMap.Field.NOTES_MEDICAL_HISTORY, "Notes_MH");
+            put(ParserMap.Field.NOTES_MEDICAL_HISTORY, "Notes_MedicalHistory");
             put(ParserMap.Field.NOTES_DIAGNOSIS, "Notes_Diagnosis");
             put(ParserMap.Field.NOTES_TREATMENT, "Notes_Treatment");
             put(ParserMap.Field.NOTES_TRAUMA, "Notes_Trauma");
