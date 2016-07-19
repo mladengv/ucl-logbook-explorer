@@ -4,6 +4,7 @@ import data.export.DataExportCSV;
 import data.export.DataExportJSON;
 import entity.Student;
 import graphics.View;
+import graphics.menus.MenuAction;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,11 +16,17 @@ import java.io.FilenameFilter;
  * Created by mladen on 11/07/16.
  */
 
-public class ExportAction extends AbstractAction {
+public class ExportAction
+        extends AbstractAction
+        implements MenuAction {
 
     private View context;
 
-    public ExportAction(View context) {
+    public ExportAction() {
+
+    }
+
+    public void setContext(View context) {
         this.context = context;
     }
 

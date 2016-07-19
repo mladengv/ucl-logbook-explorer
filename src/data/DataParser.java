@@ -1,10 +1,6 @@
 package data;
 
-import config.ParserConfig;
 import entity.Logbook;
-import entity.Student;
-import entity.Visit;
-import entity.type.Diagnosis;
 
 import java.io.File;
 import java.io.FileNotFoundException;

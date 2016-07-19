@@ -1,15 +1,23 @@
 package graphics.actions;
 
+import graphics.View;
+import graphics.menus.MenuAction;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 /**
  * Created by mladen on 11/07/16.
  */
-public class ExitAction extends AbstractAction {
+public class ExitAction
+        extends AbstractAction
+        implements MenuAction {
 
     public ExitAction() { }
+
+    public void setContext(View context) {
+
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {

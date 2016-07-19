@@ -3,6 +3,7 @@ package graphics.actions;
 import data.DataParser;
 import entity.Student;
 import graphics.View;
+import graphics.menus.MenuAction;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,13 +16,18 @@ import java.util.ListIterator;
  * Created by mladen on 11/07/16.
  */
 public class FileLoadAction
-        extends AbstractAction {
+        extends AbstractAction
+        implements MenuAction {
 
     private View context;
 
     private Task task;
 
-    public FileLoadAction(View context) {
+    public FileLoadAction() {
+
+    }
+
+    public void setContext(View context) {
         this.context = context;
     }
 

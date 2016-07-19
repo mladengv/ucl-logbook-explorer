@@ -1,17 +1,15 @@
 package graphics;
 
-import data.export.DataExportJSON;
+import config.MenuConfig;
 import entity.Logbook;
-import graphics.actions.ExitAction;
-import graphics.actions.ExportAction;
-import graphics.actions.FileLoadAction;
+import graphics.menus.Menu;
+import graphics.menus.MenuItem;
 import graphics.panels.IntroPanel;
 import graphics.panels.ProgressPanel;
 import graphics.panels.TablePanel;
 
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.KeyEvent;
+import java.awt.BorderLayout;
 
 /**
  * Created by mladen on 08/07/16.
@@ -52,6 +50,7 @@ public class View
      * Create the menu.
      */
     public void createMenu() {
+        /*
         JMenuBar menuBar = new JMenuBar();
 
         // The menu.
@@ -86,7 +85,15 @@ public class View
         menu.add(menuItem);
 
         menuBar.add(menu);
+        */
 
+        JMenuBar menuBar = new JMenuBar();
+        for (Menu menu: MenuConfig.viewMenus) {
+            for (MenuItem menuItem : menu.getItems()) {
+                menuItem.getMenuAction().setContext(this);
+            }
+            menuBar.add(menu);
+        }
         setJMenuBar(menuBar);
     }
 
