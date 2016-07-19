@@ -1,9 +1,6 @@
 package entity;
 
-import data.ParserSchema;
 import entity.type.*;
-
-import java.util.Date;
 
 /**
  * Created by mladen on 08/07/16.
@@ -20,7 +17,7 @@ public class Visit {
     private Patient patient;
 
     /**
-     * Contents of the Count.
+     * Contents of the Visit.
      */
     private History history;
     private Diagnosis diagnosis;

@@ -23,9 +23,10 @@ public class DataExportJSON {
      */
     public DataExportJSON() {
 
-        // Initialise the mapper.
+        // Initialise the schema.
         mapper = new ObjectMapper();
 
+        // Configure
         mapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
     }
 

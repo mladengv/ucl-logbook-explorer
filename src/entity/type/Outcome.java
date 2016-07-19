@@ -41,7 +41,7 @@ public class Outcome {
      *
      * @return
      */
-    public ArrayList<String> getOUtcomes() {
+    public ArrayList<String> getOutcomes() {
         return outcomes;
     }
 }

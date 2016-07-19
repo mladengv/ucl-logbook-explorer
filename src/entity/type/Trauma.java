@@ -11,6 +11,11 @@ public class Trauma {
 
     private ArrayList<String> trauma;
 
+    private String notes;
+
+    /**
+     * Default constructor
+     */
     public Trauma() {
         trauma = new ArrayList<>();
     }
@@ -42,5 +47,12 @@ public class Trauma {
 
     public ArrayList<String> getTrauma() {
         return trauma;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
+    }
+    public String getNotes() {
+        return notes;
     }
 }

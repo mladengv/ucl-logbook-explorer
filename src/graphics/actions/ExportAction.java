@@ -1,5 +1,6 @@
 package graphics.actions;
 
+import data.export.DataExportCSV;
 import data.export.DataExportJSON;
 import entity.Student;
 import graphics.View;
@@ -43,6 +44,10 @@ public class ExportAction extends AbstractAction {
         DataExportJSON jsonExporter = new DataExportJSON();
         jsonExporter.setFile(new File(fd.getDirectory() + fd.getFile()));
         jsonExporter.convertStudent(student);
+
+        DataExportCSV csvExporter = new DataExportCSV();
+        csvExporter.setFile(new File(fd.getDirectory() + student.getUsername() + ".csv"));
+        csvExporter.convertStudent(student);
 
     }
 }

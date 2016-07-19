@@ -216,7 +216,7 @@ public class Student
         ).increaseCount(visit.getTreatment().getTreatments());
         occurrenceStats.get(
                 StatsConfig.Count.COUNT_OUTCOMES
-        ).increaseCount(visit.getOutcome().getOUtcomes());
+        ).increaseCount(visit.getOutcome().getOutcomes());
     }
 
     private void updateStats(Patient patient) {
