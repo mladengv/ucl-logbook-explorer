@@ -1,10 +1,7 @@
 package entity;
 
 import data.ParserSchema;
-import entity.type.Diagnosis;
-import entity.type.History;
-import entity.type.Outcome;
-import entity.type.Treatment;
+import entity.type.*;
 
 import java.util.Date;
 
@@ -19,11 +16,15 @@ public class Visit {
     // Type of appointment.
     private String appointmentType;
 
+    // The patient.
+    private Patient patient;
+
     /**
      * Contents of the Count.
      */
     private History history;
     private Diagnosis diagnosis;
+    private Trauma trauma;
     private Treatment treatment;
     private Outcome outcome;
 
@@ -39,11 +40,19 @@ public class Visit {
      *
      * @param diagnosis
      */
-    public Visit(String type, String date, History history, Diagnosis diagnosis, Treatment treatment, Outcome outcome) {
+    public Visit(String type,
+                 String date,
+                 History history,
+                 Diagnosis diagnosis,
+                 Trauma trauma,
+                 Treatment treatment,
+                 Outcome outcome) {
+
         this(type, date);
 
-        setDiagnosis(diagnosis);
         setHistory(history);
+        setDiagnosis(diagnosis);
+        setTrauma(trauma);
         setTreatment(treatment);
         setOutcome(outcome);
     }
@@ -62,6 +71,21 @@ public class Visit {
         return appointmentType;
     }
 
+    /**
+     *
+     * @param patient
+     */
+    public void setPatient(Patient patient) {
+        this.patient = patient;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public Patient getPatient() {
+        return patient;
+    }
     /**
      *
      * @param history
@@ -92,6 +116,14 @@ public class Visit {
      */
     public Diagnosis getDiagnosis() {
         return this.diagnosis;
+    }
+
+    public void setTrauma(Trauma trauma) {
+        this.trauma = trauma;
+    }
+
+    public Trauma getTrauma() {
+        return trauma;
     }
 
     /**

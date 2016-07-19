@@ -56,6 +56,9 @@ public class Statistics {
      * @param name
      */
     public void increaseDescriptive(String name) {
+        if (name.isEmpty()) {
+            name = "Unknown";
+        }
         updateDescriptive(name, 1);
     }
 

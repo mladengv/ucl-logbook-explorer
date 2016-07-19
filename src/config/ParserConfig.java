@@ -10,7 +10,7 @@ import java.util.HashMap;
 public class ParserConfig {
 
     // Format for the dates.
-    public static String DATE_FORMAT = "E d MMMM yyyy";
+    public static String DATE_FORMAT = "yyyy";
 
     // Map of fields to strings.
     public static HashMap<ParserMap.Field, String> fieldsMap
@@ -34,8 +34,10 @@ public class ParserConfig {
 
             put(ParserMap.Field.DATA_DIAGNOSIS, "Data_Diagnosis");
             put(ParserMap.Field.DATA_TREATMENT, "Data_Treatment");
+
             put(ParserMap.Field.DATA_TRAUMA, "Data_Trauma");
             put(ParserMap.Field.DATA_TRAUMA_TYPE, "Data_Trauma_Type");
+
             put(ParserMap.Field.DATA_REFLECTION, "Data_Reflection");
             put(ParserMap.Field.DATA_OUTCOME, "Data_Outcome");
             put(ParserMap.Field.DATA_CUSTOM_1, "Data_Custom_1");

@@ -28,6 +28,10 @@ public class History {
         behaviour = new ArrayList<>();
     }
 
+    /**
+     *
+     * @param availability
+     */
     public History(String availability) {
         this();
         setAvailability(availability);

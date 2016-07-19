@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import entity.Student;
 
+import java.io.File;
 import java.io.IOException;
 
 /**
@@ -13,7 +14,9 @@ import java.io.IOException;
  */
 public class DataExportJSON {
 
-    ObjectMapper mapper;
+    private ObjectMapper mapper;
+
+    private File file;
 
     /**
      * Default constructor.
@@ -26,17 +29,21 @@ public class DataExportJSON {
         mapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
     }
 
+    public void setFile(File file) {
+        this.file = file;
+    }
+    public File getFile() {
+        return file;
+    }
+
     /**
      *
      * @param student
      */
     public void convertStudent(Student student) {
         try {
-
-
-            String json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(student);
-            System.out.println(json);
-
+            // Convert and write output to the given file.
+            mapper.writerWithDefaultPrettyPrinter().writeValue(file, student);
         } catch(JsonGenerationException e) {
             e.printStackTrace();
         } catch(JsonMappingException e) {

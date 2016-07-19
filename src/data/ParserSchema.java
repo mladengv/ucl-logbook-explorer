@@ -3,10 +3,7 @@ package data;
 import entity.Patient;
 import entity.Student;
 import entity.Visit;
-import entity.type.Diagnosis;
-import entity.type.History;
-import entity.type.Outcome;
-import entity.type.Treatment;
+import entity.type.*;
 import helper.StringSanitizer;
 
 import java.io.IOException;
@@ -103,6 +100,12 @@ public class ParserSchema {
         );
     }
 
+    public Trauma createTrauma(String[] fields) {
+        return new Trauma(
+                obtain(map, ParserMap.Field.DATA_TRAUMA_TYPE, fields),
+                obtainArray(map, ParserMap.Field.DATA_TRAUMA, fields)
+        );
+    }
     /**
      *
      * @param fields
@@ -150,6 +153,7 @@ public class ParserSchema {
                 obtain(map, ParserMap.Field.APPOINTMENT_DATE, fields),
                 createHistory(fields),
                 createDiagnosis(fields),
+                createTrauma(fields),
                 createTreatment(fields),
                 createOutcome(fields)
         );

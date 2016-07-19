@@ -1,9 +1,11 @@
 package entity;
 
 import config.StatsConfig;
+import helper.Report;
 import helper.Statistics;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 
 /**
@@ -58,10 +60,15 @@ public class Student
 
     public void initialise() {
         occurrenceStats = new HashMap<>();
+        occurrenceStats.put(StatsConfig.Count.COUNT_APPOINTMENT_TYPE, new Statistics());
+        occurrenceStats.put(StatsConfig.Count.COUNT_AGE, new Statistics());
         occurrenceStats.put(StatsConfig.Count.COUNT_GENDER, new Statistics());
+        occurrenceStats.put(StatsConfig.Count.COUNT_HISTORY_AVAILABILITY, new Statistics());
         occurrenceStats.put(StatsConfig.Count.COUNT_HISTORY_CONDITIONS, new Statistics());
         occurrenceStats.put(StatsConfig.Count.COUNT_BEHAVIOUR_MANAGEMENT, new Statistics());
         occurrenceStats.put(StatsConfig.Count.COUNT_DIAGNOSES, new Statistics());
+        occurrenceStats.put(StatsConfig.Count.COUNT_TRAUMA, new Statistics());
+        occurrenceStats.put(StatsConfig.Count.COUNT_TRAUMA_TYPE, new Statistics());
         occurrenceStats.put(StatsConfig.Count.COUNT_TREATMENTS, new Statistics());
         occurrenceStats.put(StatsConfig.Count.COUNT_OUTCOMES, new Statistics());
     }
@@ -157,15 +164,53 @@ public class Student
 
 
     private void updateStats(Visit visit) {
+
+        String age = "";
+        if (!visit.getAppointmentDate().isEmpty()
+                && !(visit.getPatient().getDateOfBirth() == null)) {
+
+            Date appointmentDate = new Date(visit.getAppointmentDate());
+            int ageValue = Report.getDiffYears(visit.getPatient().getDateOfBirth(), appointmentDate);
+
+            if (ageValue < 10) {
+                age = "Under 10";
+            } else if (ageValue <= 15) {
+                age = "10-15";
+            } else if (ageValue <= 20) {
+                age = "16-20";
+            }
+        }
+
         occurrenceStats.get(
-                StatsConfig.Count.COUNT_HISTORY_CONDITIONS
-        ).increaseCount(visit.getHistory().getConditions());
+                StatsConfig.Count.COUNT_AGE
+        ).increaseCount(age);
+        occurrenceStats.get(
+                StatsConfig.Count.COUNT_APPOINTMENT_TYPE
+        ).increaseCount(visit.getAppointmentType());
+        occurrenceStats.get(
+                StatsConfig.Count.COUNT_HISTORY_AVAILABILITY
+        ).increaseCount(visit.getHistory().getAvailability());
+
+        if (visit.getHistory().getAvailability().equals("Yes")) {
+            occurrenceStats.get(
+                    StatsConfig.Count.COUNT_HISTORY_CONDITIONS
+            ).increaseCount(visit.getHistory().getConditions());
+        }
         occurrenceStats.get(
                 StatsConfig.Count.COUNT_BEHAVIOUR_MANAGEMENT
         ).increaseCount(visit.getHistory().getBehaviour());
         occurrenceStats.get(
                 StatsConfig.Count.COUNT_DIAGNOSES
         ).increaseCount(visit.getDiagnosis().getDiagnoses());
+
+        if (!visit.getTrauma().getTraumaType().isEmpty()) {
+            occurrenceStats.get(
+                    StatsConfig.Count.COUNT_TRAUMA
+            ).increaseCount(visit.getTrauma().getTrauma());
+            occurrenceStats.get(
+                    StatsConfig.Count.COUNT_TRAUMA_TYPE
+            ).increaseCount(visit.getTrauma().getTraumaType());
+        }
         occurrenceStats.get(
                 StatsConfig.Count.COUNT_TREATMENTS
         ).increaseCount(visit.getTreatment().getTreatments());

@@ -168,6 +168,9 @@ public class Logbook {
     public void addRecord(Student student, Patient patient, Visit visit) {
         addStudent(student);
 
+        // TODO: reference to local object.
+        visit.setPatient(patient);
+
         Student localStudent = findStudentByUsername(student.getUsername());
 
         addPatient(patient, localStudent);
