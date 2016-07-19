@@ -2,8 +2,8 @@ package data;
 
 import entity.Logbook;
 
-import java.io.File;
-import java.io.FileNotFoundException;
+import javax.swing.*;
+import java.io.*;
 import java.util.Scanner;
 
 /**
@@ -16,6 +16,8 @@ public class DataParser {
 
     // Map for the parser.
     private ParserMap map;
+    private File file;
+    private Scanner scanner;
 
     // Schema for the parser.
     private ParserSchema schema;
@@ -42,11 +44,12 @@ public class DataParser {
      * @return The created book.
      * @throws FileNotFoundException
      */
-    public Logbook process(File file)
+    public void open(File file)
             throws FileNotFoundException {
 
+        this.file = file;
         // Instantiate a scanner.
-        Scanner scanner = new Scanner(file);
+        scanner = new Scanner(file);
 
         // Identify fields using a map.
         if (scanner.hasNextLine()) {
@@ -56,13 +59,25 @@ public class DataParser {
 
         // Set the parser's map for the schema.
         schema.setMap(map);
+    }
+
+    /**
+     *
+     * @return
+     */
+    public int processNext() {
+        // Count of lines read
+        int count = 0;
 
         // Read all the remaining lines.
-        while (scanner.hasNextLine()) {
+        if (scanner.hasNextLine()) {
             String line = "";
 
             // Fix trailing new lines.
             do {
+                // Increment line counter
+                count++;
+                // Concatenate
                 line += scanner.nextLine();
             } while(line.split(",(?=([^\"]*\"[^\"]*\")*[^\"]*$)").length < map.size());
 
@@ -82,12 +97,31 @@ public class DataParser {
                     schema.createPatient(fields),
                     schema.createVisit(fields)
             );
+        } else {
+            // Close scanner as no longer needed.
+            scanner.close();
         }
 
-        // Close scanner as no longer needed.
-        scanner.close();
+        return count;
+    }
 
+    public Logbook getBook() {
         // Return the generated book.
         return book;
     }
+
+    public int countLines() {
+        int lines = 0;
+
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(file));
+            while (reader.readLine() != null) lines++;
+            reader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return lines;
+    }
+
 }

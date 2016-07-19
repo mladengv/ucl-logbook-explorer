@@ -33,6 +33,9 @@ public class FileLoadAction
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        // Set cursor to wait
+        context.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+
         // Display the file dialog.
         FileDialog fd = new FileDialog(context, "Choose a file", FileDialog.LOAD);
         fd.setFile("*.csv");
@@ -80,16 +83,24 @@ public class FileLoadAction
 
             DataParser parser = new DataParser();
             try {
-                context.book = parser.process(new File(file));
 
-                // Iterate over all students.
+                // Open the file
+                parser.open(new File(file));
+
+                int count = 0, last_read = 0, lines = parser.countLines();
+                while ((last_read = parser.processNext()) > 0) {
+                    count += last_read;
+                    context.getProgressPanel().updateProgress(Math.round(100 * count/lines));
+                }
+
+                // Get the Logbook
+                context.book = parser.getBook();
+
+                // Populate table of students
                 ListIterator<Student> students = context.book.getStudents().listIterator();
                 while (students.hasNext()) {
                     context.getTablePanel().getTable().addRow(students.nextIndex() + 1, students.next());
                 }
-
-                context.removeProgress();
-
             } catch (FileNotFoundException e) {
                 // Display an error message.
                 JOptionPane.showMessageDialog(context, "Something went wrong with your file.");
@@ -99,7 +110,10 @@ public class FileLoadAction
 
         @Override
         public void done() {
-
+            // Restore cursor
+            context.setCursor(null);
+            // Remove progress bar
+            context.removeProgress();
         }
     }
 }

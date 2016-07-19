@@ -10,8 +10,7 @@ import java.beans.PropertyChangeListener;
  * Created by mladen on 11/07/16.
  */
 public class ProgressPanel
-        extends JPanel
-        implements ActionListener, PropertyChangeListener {
+        extends JPanel {
 
     private JProgressBar progressBar;
 
@@ -32,10 +31,8 @@ public class ProgressPanel
         setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
     }
 
-    public void actionPerformed(ActionEvent evt) {
-
+    public void updateProgress(int progress) {
+        progressBar.setValue(progress);
     }
 
-    public void propertyChange(PropertyChangeEvent evt) {
-    }
 }
