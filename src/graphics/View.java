@@ -77,7 +77,10 @@ public class View
         return progressPanel;
     }
     public void showProgress() {
+        progressPanel.resetProgress();
+
         add(progressPanel, BorderLayout.NORTH);
+        forceRevalidate();
     }
     public void removeProgress() {
         remove(progressPanel);
@@ -93,7 +96,7 @@ public class View
     }
 
     /**
-     *
+     * Display Viewer layout
      */
     public void showViewer() {
         removeIntro();
@@ -104,6 +107,9 @@ public class View
         forceRevalidate();
     }
 
+    /**
+     * Force re-validation and repainting.
+     */
     public void forceRevalidate() {
         getContentPane().invalidate();
         getContentPane().validate();

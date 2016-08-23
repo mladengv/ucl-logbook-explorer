@@ -4,7 +4,7 @@ import entity.Patient;
 import entity.Student;
 import entity.Visit;
 import entity.type.*;
-import helper.StringSanitizer;
+import helper.StringHelper;
 
 import java.io.IOException;
 
@@ -48,7 +48,7 @@ public class ParserSchema {
      * @return
      */
     public String obtain(ParserMap map, ParserMap.Field field, String[] fields) {
-        return StringSanitizer.deQuote(obtainPlain(map, field, fields));
+        return StringHelper.deQuote(obtainPlain(map, field, fields));
     }
 
 

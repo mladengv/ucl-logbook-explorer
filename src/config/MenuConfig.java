@@ -1,8 +1,7 @@
 package config;
 
-import graphics.actions.ExitAction;
-import graphics.actions.ExportAction;
-import graphics.actions.FileLoadAction;
+import graphics.actions.*;
+
 import graphics.menus.Menu;
 import graphics.menus.MenuItem;
 
@@ -23,6 +22,8 @@ public class MenuConfig {
         }), new Menu("Generate", KeyEvent.VK_G, new MenuItem[] {
                 new MenuItem("Create JSON file", KeyEvent.VK_J, "Generate JSON file for student", new ExportAction()),
                 new MenuItem("Create CSV file", KeyEvent.VK_C, "Generate CSV file for student", new ExportAction()),
+        }), new Menu("Batch", KeyEvent.VK_B, new MenuItem[] {
+            new MenuItem("All students, all files", KeyEvent.VK_A, "Generate files for all students", new BatchAction()),
         }),
     };
 }

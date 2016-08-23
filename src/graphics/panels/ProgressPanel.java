@@ -1,10 +1,6 @@
 package graphics.panels;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 
 /**
  * Created by mladen on 11/07/16.
@@ -27,12 +23,23 @@ public class ProgressPanel
         add(progressBar);
     }
 
+    /**
+     *
+     */
     public void initialise() {
         setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
     }
 
+    /**
+     *
+     * @param progress
+     */
     public void updateProgress(int progress) {
         progressBar.setValue(progress);
+    }
+
+    public void resetProgress() {
+        updateProgress(0);
     }
 
 }

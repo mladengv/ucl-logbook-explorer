@@ -1,6 +1,5 @@
 package data.export;
 
-import com.sun.deploy.util.StringUtils;
 import data.ParserMap;
 import entity.Patient;
 import entity.Visit;
@@ -8,10 +7,10 @@ import entity.type.Diagnosis;
 import entity.type.History;
 import entity.type.Outcome;
 import entity.type.Trauma;
+import helper.StringHelper;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * Created by mladen on 19/07/16.
@@ -25,11 +24,8 @@ public class ExporterMap {
 
     }
 
-    public String combine(String[] fields) {
-        return StringUtils.join(Arrays.asList(fields), "##");
-    }
-    public String combine(ArrayList<String> fields) {
-        return combine(fields.toArray(new String[0]));
+    private String combine(ArrayList<String> fields) {
+        return StringHelper.combine(fields, "##");
     }
 
     /**

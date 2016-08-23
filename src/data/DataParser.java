@@ -2,7 +2,6 @@ package data;
 
 import entity.Logbook;
 
-import javax.swing.*;
 import java.io.*;
 import java.util.Scanner;
 
@@ -105,11 +104,19 @@ public class DataParser {
         return count;
     }
 
+    /**
+     *
+     * @return
+     */
     public Logbook getBook() {
         // Return the generated book.
         return book;
     }
 
+    /**
+     *
+     * @return
+     */
     public int countLines() {
         int lines = 0;
 

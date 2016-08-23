@@ -27,7 +27,7 @@ public class Patient
      * Default constructor
      */
     public Patient() {
-
+        dateOfBirth = new Date();
     }
 
     /**
@@ -37,6 +37,8 @@ public class Patient
      * @param gender
      */
     public Patient(String identifier, String dateOfBirth, String gender) {
+        this();
+
         setIdentifier(identifier);
         setDateOfBirth(dateOfBirth);
         setGender(gender);
@@ -68,6 +70,7 @@ public class Patient
             this.dateOfBirth = format.parse(date);
         } catch (ParseException e) {
             // TODO
+            e.printStackTrace();
         }
     }
 

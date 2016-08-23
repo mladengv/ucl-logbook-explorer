@@ -66,7 +66,6 @@ public class FileLoadAction
         context.getTablePanel().clearTable();
 
         task = new Task(file);
-        //task.addPropertyChangeListener(this);
         task.execute();
     }
 
@@ -87,7 +86,7 @@ public class FileLoadAction
                 // Open the file
                 parser.open(new File(file));
 
-                int count = 0, last_read = 0, lines = parser.countLines();
+                int count = 0, last_read, lines = parser.countLines();
                 while ((last_read = parser.processNext()) > 0) {
                     count += last_read;
                     context.getProgressPanel().updateProgress(Math.round(100 * count/lines));

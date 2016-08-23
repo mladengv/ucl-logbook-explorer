@@ -14,7 +14,7 @@ public class ExportConfig {
      * Map for fields.
      */
     public static HashMap<ParserMap.Field, String> exportMap
-            = new HashMap<ParserMap.Field,String>() {
+            = new HashMap<ParserMap.Field, String>() {
         {
             put(ParserMap.Field.GENERAL_USERNAME, "Username");
             put(ParserMap.Field.GENERAL_NAME, "User");
@@ -54,7 +54,8 @@ public class ExportConfig {
     /**
      * Map for exporting a visit.
      */
-    public static ArrayList<ParserMap.Field> visitMap = new ArrayList<ParserMap.Field>() {
+    public static ArrayList<ParserMap.Field> visitMap
+            = new ArrayList<ParserMap.Field>() {
         {
             add(ParserMap.Field.PATIENT_IDENTIFIER);
             add(ParserMap.Field.PATIENT_BIRTHDAY);

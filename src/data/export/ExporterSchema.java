@@ -1,12 +1,11 @@
 package data.export;
 
-import com.sun.deploy.util.StringUtils;
 import config.ExportConfig;
 import data.ParserMap;
 import entity.Visit;
+import helper.StringHelper;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * Created by mladen on 19/07/16.
@@ -22,22 +21,13 @@ public class ExporterSchema {
         map = new ExporterMap();
     }
 
-    public String combine(String[] fields, String delimiter) {
-        return StringUtils.join(Arrays.asList(fields), delimiter);
-    }
-
-    public String combine(ArrayList<String> fields) {
-        return combine(fields.toArray(new String[0]), ",");
-    }
-
-
     public String createVisitHeader() {
         // List all fields
         ArrayList<String> fields = new ArrayList<>();
         for (ParserMap.Field field : ExportConfig.visitMap) {
             fields.add(ExportConfig.exportMap.get(field));
         }
-        return combine(fields);
+        return StringHelper.combine(fields);
     }
 
     /**
@@ -53,6 +43,6 @@ public class ExporterSchema {
             fields.add(map.get(visit, field));
         }
         // Combine output
-        return combine(fields);
+        return StringHelper.combine(fields);
     }
 }
