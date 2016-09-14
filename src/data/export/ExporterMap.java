@@ -3,10 +3,7 @@ package data.export;
 import data.ParserMap;
 import entity.Patient;
 import entity.Visit;
-import entity.type.Diagnosis;
-import entity.type.History;
-import entity.type.Outcome;
-import entity.type.Trauma;
+import entity.type.*;
 import helper.StringHelper;
 
 import java.text.SimpleDateFormat;
@@ -47,21 +44,30 @@ public class ExporterMap {
                 return get(visit.getPatient(), field);
             // Diagnosis fields
             case DATA_DIAGNOSIS:
-                return get(visit.getDiagnosis(), field);
+            case NOTES_DIAGNOSIS:
+                return StringHelper.enQuote(get(visit.getDiagnosis(), field));
+            // Treatment fields
+            case DATA_TREATMENT:
+            case NOTES_TREATMENT:
+                return StringHelper.enQuote(get(visit.getTreatment(), field));
             // History fields
             case DATA_MEDICAL_HISTORY:
             case DATA_MEDICAL_HISTORY_CONDITIONS:
             case DATA_BEHAVIOUR_MANAGEMENT:
             case NOTES_MEDICAL_HISTORY:
-                return get(visit.getHistory(), field);
+                return StringHelper.enQuote(get(visit.getHistory(), field));
             // Outcome fields
             case DATA_OUTCOME:
-                return get(visit.getOutcome(), field);
+            case DATA_REFLECTION:
+            case DATA_CUSTOM_1:
+            case DATA_CUSTOM_2:
+            case DATA_CUSTOM_3:
+                return StringHelper.enQuote(get(visit.getOutcome(), field));
             // Trauma fields
             case DATA_TRAUMA_TYPE:
             case DATA_TRAUMA:
             case NOTES_TRAUMA:
-                return get(visit.getTrauma(), field);
+                return StringHelper.enQuote(get(visit.getTrauma(), field));
 
             default:
                 return null;
@@ -97,6 +103,19 @@ public class ExporterMap {
         switch (field) {
             case DATA_DIAGNOSIS:
                 return combine(diagnosis.getDiagnoses());
+            case NOTES_DIAGNOSIS:
+                return diagnosis.getNotes();
+            default:
+                return null;
+        }
+    }
+
+    public String get(Treatment treatment, ParserMap.Field field) {
+        switch (field) {
+            case DATA_TREATMENT:
+                return combine(treatment.getTreatments());
+            case NOTES_TREATMENT:
+                return treatment.getNotes();
             default:
                 return null;
         }
@@ -133,6 +152,14 @@ public class ExporterMap {
         switch (field) {
             case DATA_OUTCOME:
                 return combine(outcome.getOutcomes());
+            case DATA_REFLECTION:
+                return outcome.getReflection();
+            case DATA_CUSTOM_1:
+                return outcome.getCustom().get(0);
+            case DATA_CUSTOM_2:
+                return outcome.getCustom().get(1);
+            case DATA_CUSTOM_3:
+                return outcome.getCustom().get(2);
             default:
                 return null;
         }

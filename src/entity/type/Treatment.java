@@ -10,6 +10,8 @@ public class Treatment {
     // List of recommended treatments.
     private ArrayList<String> treatments;
 
+    private String notes;
+
     /**
      *
      */
@@ -29,6 +31,11 @@ public class Treatment {
         }
     }
 
+    public Treatment(String[] treatments, String notes) {
+        this(treatments);
+        this.setNotes(notes);
+    }
+
     /**
      *
      * @param treatment
@@ -43,5 +50,21 @@ public class Treatment {
      */
     public ArrayList<String> getTreatments() {
         return treatments;
+    }
+
+    /**
+     *
+     * @param notes
+     */
+    public void setNotes(String notes) {
+        this.notes = notes;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public String getNotes() {
+        return notes;
     }
 }

@@ -96,14 +96,21 @@ public class ParserSchema {
      */
     public Diagnosis createDiagnosis(String[] fields) {
         return new Diagnosis(
-                obtainArray(map, ParserMap.Field.DATA_DIAGNOSIS, fields)
+                obtainArray(map, ParserMap.Field.DATA_DIAGNOSIS, fields),
+                obtain(map, ParserMap.Field.NOTES_DIAGNOSIS, fields)
         );
     }
 
+    /**
+     *
+     * @param fields
+     * @return
+     */
     public Trauma createTrauma(String[] fields) {
         return new Trauma(
                 obtain(map, ParserMap.Field.DATA_TRAUMA_TYPE, fields),
-                obtainArray(map, ParserMap.Field.DATA_TRAUMA, fields)
+                obtainArray(map, ParserMap.Field.DATA_TRAUMA, fields),
+                obtain(map, ParserMap.Field.NOTES_TRAUMA, fields)
         );
     }
     /**
@@ -116,7 +123,7 @@ public class ParserSchema {
                 obtain(map, ParserMap.Field.DATA_MEDICAL_HISTORY, fields),
                 obtainArray(map, ParserMap.Field.DATA_MEDICAL_HISTORY_CONDITIONS, fields),
                 obtainArray(map, ParserMap.Field.DATA_BEHAVIOUR_MANAGEMENT, fields),
-                obtainPlain(map, ParserMap.Field.NOTES_MEDICAL_HISTORY, fields)
+                obtain(map, ParserMap.Field.NOTES_MEDICAL_HISTORY, fields)
         );
     }
 
@@ -127,7 +134,8 @@ public class ParserSchema {
      */
     public Treatment createTreatment(String[] fields) {
         return new Treatment(
-                obtainArray(map, ParserMap.Field.DATA_TREATMENT, fields)
+                obtainArray(map, ParserMap.Field.DATA_TREATMENT, fields),
+                obtain(map, ParserMap.Field.NOTES_TREATMENT, fields)
         );
     }
 
@@ -138,7 +146,11 @@ public class ParserSchema {
      */
     public Outcome createOutcome(String[] fields) {
         return new Outcome(
-                obtainArray(map, ParserMap.Field.DATA_OUTCOME, fields)
+                obtainArray(map, ParserMap.Field.DATA_OUTCOME, fields),
+                obtain(map, ParserMap.Field.DATA_REFLECTION, fields),
+                obtain(map, ParserMap.Field.DATA_CUSTOM_1, fields),
+                obtain(map, ParserMap.Field.DATA_CUSTOM_2, fields),
+                obtain(map, ParserMap.Field.DATA_CUSTOM_3, fields)
         );
     }
 

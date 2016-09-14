@@ -172,12 +172,16 @@ public class Student
             Date appointmentDate = new Date(visit.getAppointmentDate());
             int ageValue = Report.getDiffYears(visit.getPatient().getDateOfBirth(), appointmentDate);
 
-            if (ageValue < 10) {
-                age = "Under 10";
+            if (ageValue < 5) {
+                age = "Under 5";
+            } else if (ageValue <= 10) {
+                age = "5-10";
             } else if (ageValue <= 15) {
-                age = "10-15";
-            } else if (ageValue <= 20) {
-                age = "16-20";
+                age = "11-15";
+            } else if (ageValue <= 18) {
+                age = "16-18";
+            } else {
+                age = "Other";
             }
         }
 

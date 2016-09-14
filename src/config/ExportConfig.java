@@ -71,7 +71,17 @@ public class ExportConfig {
             add(ParserMap.Field.DATA_TREATMENT);
             add(ParserMap.Field.DATA_TRAUMA_TYPE);
             add(ParserMap.Field.DATA_TRAUMA);
+
+            add(ParserMap.Field.DATA_REFLECTION);
             add(ParserMap.Field.DATA_OUTCOME);
+            add(ParserMap.Field.DATA_CUSTOM_1);
+            add(ParserMap.Field.DATA_CUSTOM_2);
+            add(ParserMap.Field.DATA_CUSTOM_3);
+
+            add(ParserMap.Field.NOTES_MEDICAL_HISTORY);
+            add(ParserMap.Field.NOTES_DIAGNOSIS);
+            add(ParserMap.Field.NOTES_TRAUMA);
+            add(ParserMap.Field.NOTES_TREATMENT);
         }
     };
 }

@@ -32,6 +32,11 @@ public class Diagnosis {
         }
     }
 
+    public Diagnosis(String[] values, String notes) {
+        this(values);
+        this.setNotes(notes);
+    }
+
     /**
      *
      * @param value
@@ -46,5 +51,21 @@ public class Diagnosis {
      */
     public ArrayList<String> getDiagnoses() {
         return diagnoses;
+    }
+
+    /**
+     *
+     * @param notes
+     */
+    public void setNotes(String notes) {
+        this.notes = notes;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public String getNotes() {
+        return notes;
     }
 }
